@@ -8,12 +8,12 @@ import Home from "./views/home";
 function App() {
   return (
     <>
+      <Navbar />
       <Routes>
-        <Navbar />
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Footer />
       </Routes>
+      <Footer />
     </>
   );
 }
