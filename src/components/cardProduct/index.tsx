@@ -15,10 +15,10 @@ const CardProduct: React.FC<IProduct> = ({
         <img src={imageUrl} alt={name} className="w-28 mx-auto" />
       </div>
       <div className="p-6">
-        <h5 className="mb-2 block font-sans text-xl font-bold leading-snug tracking-normal text-blue-gray-900 antialiased">
+        <h5 className="mb-2 block text-xl font-bold leading-snug tracking-normal text-blue-gray-900 antialiased">
           {name}
         </h5>
-        <p className="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
+        <p className="block text-base font-normal leading-relaxed text-inherit antialiased">
           {description}
         </p>
       </div>

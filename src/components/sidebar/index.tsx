@@ -31,7 +31,7 @@ const SideBar: React.FC<SideBarProps> = ({
   };
 
   return (
-    <div className="h-full w-1/6 bg-gray-800 p-4">
+    <div className="h-screen w-1/6 bg-gray-800 p-4 flex flex-col justify-start">
       <h1 className="text-xl text-white font-bold mb-4">Filtros y busqueda</h1>
       <input
         type="text"
