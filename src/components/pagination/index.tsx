@@ -1,57 +1,37 @@
-import React, { useState } from "react";
-import CardProduct from "../cardProduct";
-import { IProduct } from "../../interfaces/products";
+import React from "react";
 
 interface PaginationProps {
-  products: IProduct[];
+  products: any[];
+  currentPage: number;
+  setCurrentPage: (page: number) => void;
+  productsPerPage: number;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ products }) => {
-  const [currentPage, setCurrentPage] = useState<number>(1);
+const Pagination: React.FC<PaginationProps> = ({
+  products,
+  currentPage,
+  setCurrentPage,
+  productsPerPage,
+}) => {
+  const totalPages: number = Math.ceil(products.length / productsPerPage);
 
-  const productsPerPage: number = 6;
-
-  const indexOfLastProduct: number = currentPage * productsPerPage;
-  const indexOfFirstProduct: number = indexOfLastProduct - productsPerPage;
-  const currentProducts: IProduct[] = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-
-  const paginate = (pageNumber: number): void => setCurrentPage(pageNumber);
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   return (
-    <div className="px-20">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        {currentProducts.map((product: IProduct, index: number) => (
-          <div key={index}>
-            {" "}
-            <CardProduct
-              imageUrl={product.imageUrl}
-              name={product.name}
-              price={product.price}
-              description={product.description}
-            />
-          </div>
-        ))}
-      </div>
-      <div className="mt-4">
-        {Array.from({
-          length: Math.ceil(products.length / productsPerPage),
-        }).map((_, index: number) => (
-          <button
-            key={index}
-            onClick={() => paginate(index + 1)}
-            className={`mx-1 px-3 py-1 rounded ${
-              currentPage === index + 1
-                ? "bg-blue-500 text-white"
-                : "bg-gray-300"
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-      </div>
+    <div>
+      {Array.from({ length: totalPages }).map((_, index: number) => (
+        <button
+          key={index}
+          onClick={() => handlePageChange(index + 1)}
+          className={`mx-1 px-3 py-1 rounded ${
+            currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-300"
+          }`}
+        >
+          {index + 1}
+        </button>
+      ))}
     </div>
   );
 };
