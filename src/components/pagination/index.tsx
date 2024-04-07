@@ -8,6 +8,7 @@ interface PaginationProps {
 
 const Pagination: React.FC<PaginationProps> = ({ products }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
+
   const productsPerPage: number = 6;
 
   const indexOfLastProduct: number = currentPage * productsPerPage;
@@ -20,8 +21,8 @@ const Pagination: React.FC<PaginationProps> = ({ products }) => {
   const paginate = (pageNumber: number): void => setCurrentPage(pageNumber);
 
   return (
-    <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4 mx-16">
+    <div className="px-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {currentProducts.map((product: IProduct, index: number) => (
           <div key={index}>
             {" "}

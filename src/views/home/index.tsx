@@ -1,103 +1,26 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import SideBar from "../../components/sidebar";
 import { IProduct } from "../../interfaces/products";
-import CardProduct from "../../components/cardProduct";
 import Pagination from "../../components/pagination";
+import axios from "axios";
 
 const Home = () => {
-  const products: IProduct[] = [
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 1",
-      price: 10.99,
-      description: "Descripción del producto 1",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 2",
-      price: 20.99,
-      description: "Descripción del producto 2",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 3",
-      price: 30.99,
-      description: "Descripción del producto 3",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 4",
-      price: 30.99,
-      description: "Descripción del producto 4",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 5",
-      price: 30.99,
-      description: "Descripción del producto 5",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 6",
-      price: 30.99,
-      description: "Descripción del producto 6",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 7",
-      price: 30.99,
-      description: "Descripción del producto 7",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 8",
-      price: 30.99,
-      description: "Descripción del producto 8",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 9",
-      price: 30.99,
-      description: "Descripción del producto 9",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 10",
-      price: 30.99,
-      description: "Descripción del producto 10",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 11",
-      price: 30.99,
-      description: "Descripción del producto 11",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 12",
-      price: 120.99,
-      description: "Descripción del producto 12",
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/dkpotpaaf/image/upload/v1711389605/7790895000997_E01_gh5bfr.png",
-      name: "Producto 12",
-      price: 120.99,
-      description: "Descripción del producto 12",
-    },
-  ];
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axios.get(
+          "https://prueba-tecnica-bradley-back.onrender.com/products"
+        );
+        setProducts(response.data);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleSearch = (query: string) => {
     // Lógica para manejar la búsqueda
@@ -131,4 +54,3 @@ const Home = () => {
 };
 
 export default Home;
-// https://prueba-tecnica-bradley-back.onrender.com/products
