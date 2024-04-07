@@ -82,9 +82,8 @@ const Dashboard = () => {
         await axios.delete(
           `https://prueba-tecnica-bradley-back.onrender.com/products/delete/${productId}`
         );
-
-        Swal.fire("¡Producto eliminado!", "", "success");
         fetchProducts();
+        Swal.fire("¡Producto eliminado!", "", "success");
       }
     } catch (error) {
       console.error("Error al eliminar el producto:", error);
