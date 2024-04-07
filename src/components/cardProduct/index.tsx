@@ -8,13 +8,14 @@ const CardProduct: React.FC<IProduct> = ({
   description,
 }) => {
   return (
-    <div className="border-2 p-2 border-gray-600 bg-orange-200 relative flex w-80 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-      {" "}
+    <div
+      className="border-2 p-2 mx-2 md:mx-6 border-gray-600 bg-orange-200 flex flex-col rounded-xl bg-orange-200 text-gray-700 shadow-md"
+      style={{ height: "320px" }}
+    >
       <div className="w-full bg-white p-2 rounded-xl">
-        {" "}
-        <img src={imageUrl} alt={name} className="w-28 mx-auto" />
+        <img src={imageUrl} alt={name} className="w-28 h-auto mx-auto" />
       </div>
-      <div className="p-6">
+      <div className="p-4">
         <h5 className="mb-2 block text-xl font-bold leading-snug tracking-normal text-blue-gray-900 antialiased">
           {name}
         </h5>
@@ -22,7 +23,7 @@ const CardProduct: React.FC<IProduct> = ({
           {description}
         </p>
       </div>
-      <div className="p-6 pt-0">
+      <div className="p-4 pt-0">
         <p className="text-gray-800 font-semibold text-red-500">
           Precio: ${price}
         </p>
