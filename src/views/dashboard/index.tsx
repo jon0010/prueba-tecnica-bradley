@@ -23,7 +23,7 @@ const Dashboard = () => {
   } = useForm<IFormData>();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [products, setProducts] = useState<IProduct[]>([]);
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(
+  const [_selectedProductId, setSelectedProductId] = useState<string | null>(
     null
   );
   const [editedProduct, setEditedProduct] = useState<IFormData>({
@@ -65,19 +65,6 @@ const Dashboard = () => {
     setSelectedOption(option);
     setSelectedProductId(null);
     setSelectedProductDetails(null);
-  };
-
-  const handleProductSelect = (productId: string | undefined) => {
-    if (productId) {
-      setSelectedProductId(productId);
-      const selectedProduct = products.find(
-        (product) => product._id === productId
-      );
-      if (selectedProduct) {
-        setEditedProduct(selectedProduct);
-        setSelectedProductDetails(selectedProduct);
-      }
-    }
   };
 
   useEffect(() => {
@@ -323,8 +310,8 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="flex">
-      <div className="min-h-screen w-1/6 bg-gray-800 p-4 flex flex-col justify-start">
+    <div className="flex flex-col sm:flex-row">
+      <div className="sm:w-1/6 bg-gray-800 p-4 flex flex-col justify-start">
         <ul>
           <li
             className="cursor-pointer text-white font-semibold my-4"
@@ -346,7 +333,7 @@ const Dashboard = () => {
           </li>
         </ul>
       </div>
-      <div className="w-3/4 p-4">
+      <div className="w-full sm:w-3/4 p-4">
         {selectedOption === "create" && (
           <form onSubmit={handleSubmit(handleCreateProduct)}>
             <div className="mb-4">
@@ -500,7 +487,7 @@ const Dashboard = () => {
               />
             </div>
             {selectedProductToUpdate && (
-              <form className="my-14" onSubmit={handleUpdateProduct}>
+              <form className="my-32" onSubmit={handleUpdateProduct}>
                 <div className="mb-4">
                   <h1 className="font-semibold text-gray-700 my-4">
                     {" "}
@@ -606,7 +593,7 @@ const Dashboard = () => {
           </div>
         )}
         {selectedOption === "delete" && (
-          <div>
+          <div className="mb-12">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
               {currentProducts.map((product, index) => (
                 <div
