@@ -26,7 +26,7 @@ const Dashboard = () => {
   const [_selectedProductId, setSelectedProductId] = useState<string | null>(
     null
   );
-  const [editedProduct, setEditedProduct] = useState<IFormData>({
+  const [editedProduct, _setEditedProduct] = useState<IFormData>({
     imageUrl: "",
     name: "",
     price: 0,

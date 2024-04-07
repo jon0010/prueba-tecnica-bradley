@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import SideBar from "../../components/sidebar";
 import { IProduct } from "../../interfaces/products";
 import Pagination from "../../components/pagination";
