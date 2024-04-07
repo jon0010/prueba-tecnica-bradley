@@ -44,6 +44,7 @@ const Dashboard = () => {
   const [selectedCardToDelete, setSelectedCardToDelete] = useState<
     string | null
   >(null);
+  const [deleteTrigger, setDeleteTrigger] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -236,6 +237,14 @@ const Dashboard = () => {
     }
   };
 
+  useEffect(() => {
+    if (deleteTrigger) {
+      Swal.fire("¡Producto eliminado!", "", "success");
+      navigate("/");
+      setDeleteTrigger(false);
+    }
+  }, [deleteTrigger]);
+
   const onDelete = async (productId: string | null) => {
     try {
       if (!productId) {
@@ -259,6 +268,7 @@ const Dashboard = () => {
         );
 
         Swal.fire("¡Producto eliminado!", "", "success");
+        setDeleteTrigger(true);
       }
     } catch (error) {
       console.error("Error al eliminar el producto:", error);
