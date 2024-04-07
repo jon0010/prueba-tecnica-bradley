@@ -82,7 +82,8 @@ const Dashboard = () => {
         await axios.delete(
           `https://prueba-tecnica-bradley-back.onrender.com/products/delete/${productId}`
         );
-        fetchProducts();
+        setProducts(products.filter((product) => product._id !== productId));
+
         Swal.fire("¡Producto eliminado!", "", "success");
       }
     } catch (error) {
