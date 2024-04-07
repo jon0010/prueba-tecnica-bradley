@@ -5,7 +5,9 @@ const Footer = () => {
   return (
     <footer className="bg-gray-800 text-white p-4 text-center fixed bottom-0 w-full flex justify-between items-center">
       <div className="text-right">
-        <p className="text-xl font-semibold">Prueba técnica bradley</p>
+        <p className="text-xl text-start font-semibold">
+          Prueba técnica bradley
+        </p>
       </div>
       <div className="text-left flex items-center">
         <a href="https://jonnahuelpereyra.com.ar/" target="_blank">
