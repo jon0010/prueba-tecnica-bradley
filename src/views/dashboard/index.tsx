@@ -47,19 +47,50 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          "https://prueba-tecnica-bradley-back.onrender.com/products"
-        );
-        setProducts(response.data);
-      } catch (error) {
-        console.error("Error al obtener la lista de productos:", error);
-      }
-    };
-
     fetchProducts();
   }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get(
+        "https://prueba-tecnica-bradley-back.onrender.com/products"
+      );
+      setProducts(response.data);
+    } catch (error) {
+      console.error("Error al obtener la lista de productos:", error);
+    }
+  };
+
+  const onDelete = async (productId: string | null) => {
+    try {
+      if (!productId) {
+        console.error("No se ha seleccionado ningún producto para eliminar");
+        return;
+      }
+
+      const result = await Swal.fire({
+        title: "¿Estás seguro de que deseas eliminar este producto?",
+        showCancelButton: true,
+        confirmButtonText: "Eliminar",
+        cancelButtonText: "Cancelar",
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        reverseButtons: true,
+      });
+
+      if (result.isConfirmed) {
+        await axios.delete(
+          `https://prueba-tecnica-bradley-back.onrender.com/products/delete/${productId}`
+        );
+        setProducts(products.filter((product) => product._id !== productId));
+
+        Swal.fire("¡Producto eliminado!", "", "success");
+      }
+    } catch (error) {
+      console.error("Error al eliminar el producto:", error);
+      Swal.fire("¡Error!", "Hubo un problema al eliminar el producto", "error");
+    }
+  };
 
   const handleSidebarOptionClick = (option: string) => {
     setSelectedOption(option);
@@ -233,36 +264,6 @@ const Dashboard = () => {
       } else {
         console.error("Error:", error.message);
       }
-    }
-  };
-
-  const onDelete = async (productId: string | null) => {
-    try {
-      if (!productId) {
-        console.error("No se ha seleccionado ningún producto para eliminar");
-        return;
-      }
-
-      const result = await Swal.fire({
-        title: "¿Estás seguro de que deseas eliminar este producto?",
-        showCancelButton: true,
-        confirmButtonText: "Eliminar",
-        cancelButtonText: "Cancelar",
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        reverseButtons: true,
-      });
-
-      if (result.isConfirmed) {
-        await axios.delete(
-          `https://prueba-tecnica-bradley-back.onrender.com/products/delete/${productId}`
-        );
-
-        Swal.fire("¡Producto eliminado!", "", "success");
-      }
-    } catch (error) {
-      console.error("Error al eliminar el producto:", error);
-      Swal.fire("¡Error!", "Hubo un problema al eliminar el producto", "error");
     }
   };
 
